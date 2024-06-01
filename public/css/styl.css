@@ -1,0 +1,415 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Revoir le background de Home */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+    color: #fff;
+}body{
+    background-color: #100;
+
+}select{
+    background-color: #222;
+}
+/*===============================
+        Style du Header 
+================================*/
+header{
+    background-color: #222;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0 5%;
+}header .logo a{
+    font-size: 25px;
+    color: #29d9d5;
+    text-decoration:none; /*enleve la barre*/
+}.menu li {
+    list-style: none;
+    display: inline-flex;
+    margin-inline: 10px;
+}.menu a{
+    /* color: #fff; */
+    font-size: 14px;
+    text-decoration: none;
+}.btn-reservation{
+    color: #29d9d5;
+    font-size: 14px;
+    border: 2px solid #29d9d5;
+    padding: 5px 20px;
+    transition: 0,5s;
+    text-decoration: none;
+    font-weight: bolder;
+}.btn-reservation:hover{
+    background-color: #29d9d5;
+    color: #f8f9fa;
+}
+/* Fin Sytle Header */
+
+/*==============================
+    STYLE DE LA SECTION HOME
+================================*/
+#home {
+    background: linear-gradient(rgba(0,0,0,0.1),#333),url(../image/img3.jpg);
+    /* background-color: red; */
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}#home h2{
+    font-size: 45px;
+    margin-bottom: 10px ;
+    -webkit-text-stroke: #fff 3px;
+    color:transparent;
+}#home h4{
+    font-size: 50px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}#home p{
+    margin-bottom: 10px;
+    font-size: 12px;
+}.find_trip{
+    background-color: #222;
+    padding: 20px;
+    width: 90%;
+    position: absolute;
+    bottom: -75px;
+}.find_trip form label{
+    color: #999;
+    font-size: 15px;
+    margin-bottom: 10px;
+}.find_trip input[type='submit']{
+    background-color: #21fbf7;
+    color: #fff;
+    font-weight: bolder;
+}.find_trip .select{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 20px 0;
+    width: 100%;
+}.find_trip a{
+    text-decoration: none;
+}.select select{
+    padding: 10px 20px;
+    width: 70%;
+}#passengerButton{
+    padding: 10px 20px;
+    background-color:#29d9d5;
+    border: none;
+    font-weight:bolder;
+    cursor: pointer;
+    margin-right: 10px;
+}.home-btn{
+    display: flex;
+    justify-content: center;
+}
+/*===========================
+       STYLE DE MODAL
+=============================*/
+.modal-content {
+    display: none;
+    padding: 0 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index:900;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}.modal-content > div:first-child{
+    padding: 10px;
+    margin-top: 300px;
+    background-color: #21fbf7;
+}.selection{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 10px 0;
+}.selection input{
+    width: 60%;
+    border: 1px solid #29d9d5;
+    color: #29d9d5;
+}.selection input:focus{
+    width: 60%;
+    border-color: #29d9d5;
+    box-shadow: 0 0 8px #21fbf7;
+}.modal-content .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}.modal-content .close:hover,
+ .modal-content .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*===========================
+        STYLE DE A PROPOS
+=============================*/
+#a-propos{
+    margin-top: 80px;
+    margin-left: 20px;
+}.img-desc{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 100%;
+}.img-desc .left{
+    position: relative;
+    height: 250px;
+}.img-desc .left video{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-shadow:0 0 10px #29d9d5;
+
+}.img-desc .left::after{
+    position: absolute;
+    bottom: -10px;
+    right: 10px;
+    content: "";
+    height: 100%;
+    background-color: #29d9d5;
+    width: 100%;
+    z-index: -1;
+}.img-desc .right{
+    margin-bottom: 20px;
+    margin-left: 20px;
+    position: relative;
+    
+}.img-desc .right h3{
+    font-size: 19px;
+}.img-desc .right p{
+    color: #999;
+    font: 14px;
+    margin-bottom: 20px;
+}.img-desc .right a{
+    border: 1px solid #29d9d5;
+    color: #29d9d5;
+    font-size: 14px;
+    padding: 8px 25px;
+    font-weight: bold;
+}
+
+/*=============================
+       SECTION DESTINATION
+===============================*/
+#popular-destination{
+  padding: 0 10% ;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}#popular-destination .content{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+  gap: 32px;
+
+}#popular-destination .content .box{
+  overflow: hidden;
+  position: relative;
+  height: 250px;
+  transition: 0.5s;
+}#popular-destination .content .box img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}.box .content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    align-items: center;
+    transform: translateX(100%);
+    transition: 0.5s;
+}.box .content h4{
+    font-size: 25px;
+    margin-bottom: 10px;
+    color: black;
+}.box .content p{
+    padding: 2px;
+    font-size: 12px;
+    color: #222;
+}.box .content p:nth-child(3){
+    margin-bottom: 25px;
+    text-decoration: none;
+}.box .content a{
+    margin-top: 60px;
+    padding: 10px 60px;
+    border: 2px solid #29d9d5;
+    color: #29d9d5;
+    font-weight: bold;
+}.box:hover{
+    box-shadow: 0 0 10px #29d9d5;
+}.box:hover .content{
+    transform: translateX(0);
+}
+/*===========================
+        SECTION FOOTER
+=============================*/
+#Pourquoi-voyager{
+    display: flex;
+    justify-content: center;
+   
+}.titre{
+    text-transform: capitalize;
+    font-weight: bold;
+    color: #fff;
+    position: relative;
+    margin-left:20px ;
+    font-size: 18px;
+}.titre span{
+    color: #29d9d5;
+}
+
+/*============================
+    STYLE DE RESERVATION
+==============================*/
+.reservation{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}#form-reservation{
+    border:#fff 1px solid ;
+    margin-top: 100px;
+    margin-inline: 20px;
+    background-color: #222;
+    padding: 10px;
+}#form-reservation form div{
+    margin: 10px 0px;
+}#form-reservation input{
+    background-color: #222;
+}
+/*===========================
+        STYLE DE STRIPE
+=============================*/
+.StripeElement {
+    background-color: #32325d;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    padding: 10px;
+    border-radius: 4px;
+}.StripeElement--focus {
+    border-color: #f8f9fa;
+}.StripeElement--invalid {
+   border-color: #fa755a;
+}.StripeElement--webkit-autofill {
+    background-color: #f8f9fa !important;
+}
+/*===============================
+       STYLE POUR LES TICKETS
+=================================*/
+.ticket-download{
+    margin-top:70px;
+    margin-inline: 25px;
+    border: 1px solid #fff;
+    box-shadow: 0 0 8px #fff;
+    padding: 10px;
+}.ticket-download h3{
+    text-align:center;
+}.ticket-download h2{
+    margin-top:10px;
+    text-decoration:underline;
+    text-align: center;
+}.details{
+      display: flex;
+      justify-content:space-evenly;
+      align-items:center;
+}.ticket-download h4{
+      text-align:center;
+      margin-top: 10px;
+      text-decoration:underline;
+}.ticket-section{
+      text-align: center;
+}.ticket-download table{
+    width:100%;
+    border: 1px solid red;
+    border-collapse:collapse;
+    background-color:#122;
+    text-align: center;
+    margin-top: 20px;
+}.ticket-download table th,td{
+    border:1px solid white
+}
+
+/*================================
+    STYLE POUR LA CONNEXION
+=================================*/
+.auth{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.login {
+    width: 300px;
+    background-color: #ffffff;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+    margin: 100px auto;
+}
+.login h1 {
+    text-align: center;
+    color: #5b6574;
+    font-size: 24px;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #dee0e4;
+}
+.login form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+}
+.login form label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #3274d6;
+    color: #ffffff;
+}
+.login form input[type="password"], .login form input[type="email"],.login form input[type="text"] {
+    width: 210px;
+    height: 50px;
+    border: 1px solid #dee0e4;
+    margin-bottom: 20px;
+    color: #100;
+    padding: 0 15px;
+}
+.login form input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+   margin-top: 20px;
+    background-color: #3274d6;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+}
+.login form input[type="submit"]:hover {
+  background-color: #2868c7;
+    transition: background-color 0.2s;
+}
+/*==================================
+    STYLE POUR ERREUR
+==================================*/
+.souci{
+    color: red;
+}
