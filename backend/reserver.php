@@ -15,6 +15,7 @@
         $_SESSION['adult'] = $adult;
         $_SESSION['young'] = $young;
         $_SESSION['child'] = $child;
+        $_SESSION['starting_date'] = $_POST['starting_date'];
 
         header("Location:../pages/frontend/reservation.php");
     }
@@ -24,5 +25,4 @@
     else {
         echo "Aucune donnée reçue.";
     }
-    echo '<img src = "../pages/frontend/reservation.php"/>'
 ?>

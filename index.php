@@ -1,8 +1,6 @@
 <?php
   session_start();
 
-  //$_SESSION['customer_id'] = null;
-  // Connexion à la base de données
   try
   {
     $mysqlClient = new PDO('mysql:host=localhost;dbname=gares;charset=utf8',
@@ -22,26 +20,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RailRoost</title>
     <link rel="stylesheet" href="public/css/styl.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="shortcut icon" href="public/image/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     <script src="public/js/script.js" async></script>
   </head>
 <body>
   <header>
     <div class="logo">
-      <a href="/"><span>Rail</span> Roost</a>
+      <a href=""><span>Rail</span> Roost</a>
       </div>
       <ul class="menu">
         <?php if(isset($_SESSION['customer_id'])) {
-            echo "<li><a href=\"/\">Accueil</a></li>";
-            echo "<li><a href=\"/pages/frontend/resume.php\">Historique</a></li>";
-            // echo "<li><a href=\"/#contact\">profile</a></li>";
-            echo "<li><a href=\"/backend/deconnexion.php\"><i class=\"fas fa-sign-out-alt\"></i></a></li>";
+            echo "<li><a href=\"./index.php\">Accueil</a></li>";
+            echo "<li><a href=\"./pages/frontend/resume.php\">Historique</a></li>";
+            echo "<li><a href=\"./pages/frontend/contact.php\">Contact</a></li>";
+            echo "<li><a href=\"./backend/deconnexion.php\"><i class=\"fas fa-sign-out-alt\"></i></a></li>";
           }else{
-            echo "<li><a href=\"#home\">Accueil</a></li>";
-            echo "<li><a href=\"#a-propos\">à propos</a></li>";
-            echo "<li><a href=\"#popular-destination\">Destinations</a></li>";
-            echo "<li><a href=\"#contact\">Contact</a></li>";
-            echo "<li><a href=\"/pages/auth.php\">Authentification</a></li>";
+            echo "<li><a href=\"./index.php\">Accueil</a></li>";
+            echo "<li><a href=\"./index.php#a-propos\">A Propos</a></li>";
+            echo "<li><a href=\"./index.php#popular-destination\">Destinations</a></li>";
+            echo "<li><a href=\"./pages/frontend/contact.php\">Contact</a></li>";
+            echo "<li><a href=\"./pages/auth.php\">Authentification</a></li>";
           }
         ?>
       </ul>
@@ -61,7 +60,7 @@
               <label for="departure">Gare de départ:</label>
             </div>
             <div>
-              <select id="departure" name="departure" required>
+              <select id="departure" name="departure" required onchange="disableSelectedOption()">
                 <!-- Options seront ajoutées dynamiquement par JavaScript -->
                 <option value="#" disabled selected></option>
                 <?php 
@@ -78,7 +77,7 @@
               <label for="arrival">Gare d'arrivée:</label>
             </div>
             <div>
-              <select id="departure" name="arrival" required>
+              <select id="arrival" name="arrival" required>
                 <!-- Options seront ajoutées dynamiquement par JavaScript -->
                 <option value="#" disabled selected></option>
                 <?php 
@@ -90,9 +89,20 @@
               </select>
             </div>
           </div>
+          <div>
+            <div>
+              <label for="starting_date">Date de départ</label>
+            </div>
+            <div>
+              <input type="date" name="starting_date" id="starting_date" required>
+            </div>
+
+          </div>
           <a href="#" id="passengerButton">Passager</a>
         </div>
         <p id="souci" style="color: red; font-size:small;text-align:center; margin-bottom:12px"></p>
+        <p id="souci_date" style="color: red; font-size:small;text-align:center; margin-bottom:12px"></p>
+        <p id="souci_trajet" style="color: red; font-size:small;text-align:center; margin-bottom:12px"></p>
         <div class="modal-content">
           <div>
             <div>
@@ -312,39 +322,59 @@
     </div>
   </div>
 
-  <!-- section Pourquoi Voyager ? -->
-  <div id="Pourquoi-voyager" >
+  <!-- <div id="Pourquoi-voyager" >
     <h1 class="titre" >Pourquoi voyager avec Rail <span>Roost</span> ?</h1>
-  </div>
-    <script>
+  </div> -->
+  <?php include('./pages/common/footer.php') ?>
+  <script>
+    var btn_reserver = document.querySelector('.reserver');
+    btn_reserver.addEventListener('click', (e) => {
+      var selection = document.querySelectorAll('.selection input[type="number"]');
+      let nbr_Correct = 0;
+      let nbreSelect_Correct = 0;
+      let date_Bon = true;
+      var currentDate = new Date();
+      var Date_Pris = new Date(document.getElementById('starting_date').value);
+      var gare_Depart = document.getElementById('departure').value;
+      var gare_Arrivee = document.getElementById('arrival').value;
+      let bon_trajet = true;
+      if(gare_Arrivee === gare_Depart){
+        bon_trajet = false;
+      }
 
-
-      var btn_reserver = document.querySelector('.reserver');
-      btn_reserver.addEventListener('click', (e) => {
-        var selection = document.querySelectorAll('.selection input[type="number"]');
-        let nbr_Correct = 0;
-        let nbreSelect_Correct = 0;
-
-        // Vérifiez les inputs de type number
-        selection.forEach(elt => {
-          if (parseInt(elt.value) > 0) {
-            nbr_Correct += 1;
-          }
-        });
-
-        // Vérifiez les options sélectionnées dans les selects
-        var slt = document.querySelectorAll('select');
-        slt.forEach(select => {
-          if (select.value !== '#') {
-            nbreSelect_Correct += 1;
-          }
-        });
-
-        if (nbr_Correct === 0 || nbreSelect_Correct !== 2) {
-          document.getElementById('souci').innerText = "Vérifier vos informations: Gare de départ, arrivée et les passagers.";
-            e.preventDefault();
-            e.stopPropagation();
+      if(Date_Pris < currentDate){
+        date_Bon = false;
+      }
+      // Vérifiez les inputs de type number
+      selection.forEach(elt => {
+        if (parseInt(elt.value) > 0) {
+          nbr_Correct += 1;
         }
+      });
+
+      // Vérifiez les options sélectionnées dans les selects
+      var slt = document.querySelectorAll('select');
+      slt.forEach(select => {
+        if (select.value !== '#') {
+          nbreSelect_Correct += 1;
+        }
+      });
+
+      if ((nbr_Correct === 0 || nbreSelect_Correct !== 2) ) {
+        document.getElementById('souci').innerText = "Vérifier vos informations: Gare de départ, arrivée et les passagers.";
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      if(!date_Bon){
+        document.getElementById('souci_date').innerText = "Date de départ incorrect";
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      if(!bon_trajet){
+        document.getElementById('souci_trajet').innerText = "Trajet incorrect";
+        e.preventDefault();
+        e.stopPropagation();
+      }
     });
   </script>
 </body>

@@ -116,6 +116,11 @@ header{
 }.home-btn{
     display: flex;
     justify-content: center;
+}.find_trip input[type='date']{
+    border: 1px solid white;
+    height:39px;
+    margin-right:20px;
+    color:#29d9d5;
 }
 /*===========================
        STYLE DE MODAL
@@ -295,6 +300,8 @@ header{
     margin: 10px 0px;
 }#form-reservation input{
     background-color: #222;
+}.reservation input[type="number"]{
+    width:90%;
 }
 /*===========================
         STYLE DE STRIPE
@@ -412,4 +419,97 @@ header{
 ==================================*/
 .souci{
     color: red;
+}
+
+/*==================================
+    STYLE POUR FOOTER
+==================================*/
+
+#contact{
+    padding: 0 10%;
+    margin-bottom: 50px;
+    height: 90vh;
+}
+
+#contact form{
+    background-color: #fff;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.left-right{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.left-right .left, .left-right .right{
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+}
+
+#contact form label{
+    font-size: 14px;
+    padding: 10px 0;
+    font-weight: 600;
+}
+
+#contact form input{
+    padding: 8px;
+    outline: 0;
+    border: 1px solid #999;
+}
+
+textarea{
+    height: 150px;
+    resize: none;
+    outline:0;
+    width: 100%;
+    padding: 10px;
+}
+
+#contact form input :focus, textarea :focus{
+    border: 1px solid #29d9d5;
+}
+iframe{
+    height: 150px;
+    width: 100%;
+}
+
+#contact button{
+    width: fit-content;
+    padding: 8px 40px;
+    background-color: #100;
+     border: 1px solid #100;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#contact button:hover{
+    letter-spacing: 1px;
+}
+
+#footer{
+    width: 100%;
+    background-color: #222;
+    padding: 10px 0;
+    font-size: 20px;
+    text-align: center;
+}
+footer p{
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    background-color: #222;
+    padding: 10px 0;
+    font-size: 20px;
+    text-align: center;
+}
+footer p span{
+    color: aqua;
 }

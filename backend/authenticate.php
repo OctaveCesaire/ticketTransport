@@ -16,14 +16,20 @@
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        echo $user['email'];
 
         if ($user && password_verify($password, $user['pswd'])) {
             $_SESSION['customer_id'] = $user['id'];
-            header('Location: /');
+            if($user['role_as']==='guest')
+                header('Location: ../index.php');
+            else{
+                $_SESSION['customer_role'] = $user['role_as'];
+                header('Location: ../pages/admin/dashbord.php');
+            }
             exit;
         } else {
             // Authentification échouée
-            header('Location: /pages/auth.php');
+            header('Location: ../pages/auth.php');
             exit;
         }
     } else {
